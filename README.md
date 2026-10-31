@@ -14,6 +14,10 @@ paperfitjs also handles page configuration, pagination, and rendering through Pa
 - **Pagination**: Add page breaks, running headers, footers, and page numbers.
 - **Framework support**: Use it with Vanilla JavaScript, React, Vue, or Angular.
 
+## Examples
+
+Use case examples for Vanilla JavaScript, Vue, React, and Angular are available in the [pdf_examples repository](https://github.com/dokufy/pdf_examples).
+
 ## Getting started
 
 ### Installation
