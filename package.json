@@ -1,29 +1,78 @@
 {
   "name": "paperfit.js",
   "version": "1.0.0",
-  "description": "Complementary library to use with paperfit service",
+  "description": "Build HTML templates ready for PDF conversion with paperfit.",
   "keywords": [
-    "demo",
-    "typescript"
+    "paperfit",
+    "pagedjs",
+    "pdf",
+    "typescript",
+    "paged-media",
+    "html-to-pdf"
   ],
-  "homepage": "",
-  "author": "Amtonio Toncetti <antoniot167@gmail.com>",
+  "homepage": "https://github.com/dokufy/paperfit.js#readme",
+  "bugs": {
+    "url": "https://github.com/dokufy/paperfit.js/issues"
+  },
+  "author": "Antonio Toncetti <antoniot167@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mattpocock/tt-package-demo.git"
+    "url": "git+https://github.com/dokufy/paperfit.js.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./compiler": {
+      "types": "./dist/compiler.d.ts",
+      "import": "./dist/compiler.js",
+      "default": "./dist/compiler.js"
+    },
+    "./vite": {
+      "types": "./dist/vite.d.ts",
+      "import": "./dist/vite.js",
+      "default": "./dist/vite.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "paperfit-build": "./dist/cli.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
-  "type": "module",
-  "license": "MIT",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node -e \"require('node:fs').chmodSync('dist/cli.js', 0o755)\"",
+    "prepack": "npm run build",
+    "lint": "oxlint",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
+  "dependencies": {
+    "pagedjs": "^0.4.3"
+  },
   "devDependencies": {
+    "@types/node": "^26.6.6",
+    "jsdom": "^30.1.3",
+    "oxlint": "^1.90.0",
     "prettier": "^3.9.10",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
   }
 }
