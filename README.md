@@ -1,11 +1,11 @@
-# paperfit.js
+# paperfitjs
 
 Build HTML templates that accept input variables and render them to PDF with [paperfit](https://github.com/dokufy/paperfit).
 
-paperfit passes the input variables from each render request into the template, and paperfit.js makes them available to your code or binds them directly into the HTML.
+paperfit passes the input variables from each render request into the template, and paperfitjs makes them available to your code or binds them directly into the HTML.
 This lets one layout produce a personalized invoice, report, contract, or letter for each request.
 
-paperfit.js also handles page configuration, pagination, and rendering through Paged.js.
+paperfitjs also handles page configuration, pagination, and rendering through Paged.js.
 
 ## Highlights
 
@@ -20,16 +20,16 @@ paperfit.js also handles page configuration, pagination, and rendering through P
 
 ```sh
 # npm
-npm install paperfit.js
+npm install paperfitjs
 
 # pnpm
-pnpm add paperfit.js
+pnpm add paperfitjs
 
 # yarn
-yarn add paperfit.js
+yarn add paperfitjs
 
 # bun
-bun add paperfit.js
+bun add paperfitjs
 ```
 
 The package is published as an ES module. The CLI and build integrations require Node.js 22.12 or newer.
@@ -37,14 +37,14 @@ The package is published as an ES module. The CLI and build integrations require
 ### Input variables
 
 paperfit accepts input variables with each render request and injects them into `window.__PAPERFIT_INPUT__`.
-paperfit.js exposes that object through `getPaperfitInput()` and can bind it directly into the HTML.
+paperfitjs exposes that object through `getPaperfitInput()` and can bind it directly into the HTML.
 
 Given this input object:
 
 ```json
 {
   "title": "Invoice",
-  "customer": { "name": "Ada" },
+  "customer": { "name": "Alice" },
   "items": [{ "name": "Widget", "qty": 2, "price": "10.00" }]
 }
 ```
@@ -52,10 +52,10 @@ Given this input object:
 Read it in JavaScript:
 
 ```js
-import { getPaperfitInput } from 'paperfit.js';
+import { getPaperfitInput } from 'paperfitjs';
 
 const input = getPaperfitInput();
-console.log(input.customer.name); // Ada
+console.log(input.customer.name); // Alice
 ```
 
 Bind it directly into the markup:
@@ -137,7 +137,7 @@ The `data-paperfit-*` attributes connect the markup to the input object:
 Paths use dot notation, so `customer.name` reads `input.customer.name`.
 Inside `data-paperfit-each`, paths are relative to the current item.
 
-Paged.js flows the content into pages, while paperfit.js adds elements that control pagination:
+Paged.js flows the content into pages, while paperfitjs adds elements that control pagination:
 
 - `<paperfit-page-break>` starts a new page.
 - `<paperfit-avoid-break>` keeps its content together on one page.
@@ -165,11 +165,11 @@ import {
   bindPaperfitVariables,
   configurePage,
   renderPaperfit,
-} from 'paperfit.js';
+} from 'paperfitjs';
 
 configurePage({ size: 'A4', margin: '20mm', pageNumbers: 'bottom-right' });
 
-const defaultInput = { title: 'Hello', customer: { name: 'Ada' } };
+const defaultInput = { title: 'Hello', customer: { name: 'Alice' } };
 setPaperfitDefaultInput(defaultInput);
 
 const input = getPaperfitInput();
@@ -188,7 +188,7 @@ renderPaperfit({ source: '#app' });
 
 ```tsx
 import { createRoot } from 'react-dom/client';
-import { renderAfterFrameworkMount } from 'paperfit.js';
+import { renderAfterFrameworkMount } from 'paperfitjs';
 
 const root = createRoot(document.getElementById('root')!);
 root.render(<App />);
@@ -207,7 +207,7 @@ renderAfterFrameworkMount(undefined, { source: '#root' });
 
 ```ts
 import { createApp } from 'vue';
-import { renderAfterFrameworkMount } from 'paperfit.js';
+import { renderAfterFrameworkMount } from 'paperfitjs';
 
 const app = createApp(App);
 app.mount('#app');
@@ -225,7 +225,7 @@ renderAfterFrameworkMount(undefined, { source: '#app' });
 
 ```ts
 import { bootstrapApplication } from '@angular/platform-browser';
-import { renderAfterFrameworkMount } from 'paperfit.js';
+import { renderAfterFrameworkMount } from 'paperfitjs';
 
 bootstrapApplication(AppComponent).then(() => {
   renderAfterFrameworkMount(undefined, { source: 'app-root' });
@@ -239,7 +239,7 @@ bootstrapApplication(AppComponent).then(() => {
 Use `configurePage` or the `<paperfit-document>` custom element to define `@page` rules.
 
 ```ts
-import { configurePage } from 'paperfit.js';
+import { configurePage } from 'paperfitjs';
 
 configurePage({
   size: 'A4',
@@ -255,7 +255,7 @@ The same page size, orientation, and margins can be set as attributes on `<paper
 
 ### Custom elements
 
-Importing `paperfit.js` registers these elements automatically.
+Importing `paperfitjs` registers these elements automatically.
 `<paperfit-document>` applies its page settings and renders itself unless `auto-render="false"` is set.
 
 ```html
@@ -300,7 +300,7 @@ The CLI flattens nested build output into a single root directory and rewrites r
 ### Vite plugin
 
 ```ts
-import { paperfitVitePlugin } from 'paperfit.js/vite';
+import { paperfitVitePlugin } from 'paperfitjs/vite';
 
 export default {
   plugins: [paperfitVitePlugin()],
@@ -322,22 +322,8 @@ export default {
 
 The Node.js-only entry points are available as subpath exports:
 
-- `paperfit.js/compiler`: `compilePaperfitBuild(options)`
-- `paperfit.js/vite`: `paperfitVitePlugin(options?)`
-
-## Releasing
-
-Releases are published to npm by GitHub Actions when a version tag is pushed.
-
-1. Add an `NPM_TOKEN` repository secret in GitHub containing an npm granular access token with publish rights for this package.
-2. Bump the version and push the tag:
-
-   ```sh
-   npm version patch # or minor / major
-   git push --follow-tags
-   ```
-
-3. The `Verify` job runs formatting checks, linting, tests, and the build. Once it passes, the `Publish to npm` job publishes the package.
+- `paperfitjs/compiler`: `compilePaperfitBuild(options)`
+- `paperfitjs/vite`: `paperfitVitePlugin(options?)`
 
 ## License
 

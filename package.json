@@ -1,5 +1,5 @@
 {
-  "name": "paperfit.js",
+  "name": "@dokufy/paperfitjs",
   "version": "1.0.0",
   "description": "Build HTML templates ready for PDF conversion with paperfit.",
   "keywords": [
