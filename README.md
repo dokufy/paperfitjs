@@ -17,7 +17,7 @@ Using this library to generate PDFs with [paperfit](https://github.com/dokufy/pa
 
 ### Javascript
 
-    import global from 'paperfit.js'; 
+    import global from 'paperfit.js';
 
     // Define an object representing default values (optional)
     // const defaultUserInput: UserInput = {
